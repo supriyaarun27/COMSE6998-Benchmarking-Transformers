@@ -52,16 +52,9 @@ Change these as required.
 Once the training is finished your model will be uploaded to the hugging face Model Hub. 
 
 
+### Step 4 : Run Benchmarking Code 
 
-# Benchmarking
-
-## Installation
-
-```
-$ pip install -q git+https://github.com/huggingface/transformers.git
-```
-
-## Memory consumption benchmarking
+#### Memory consumption benchmarking
 
 * Here, we will benchmark the memory consumption of the 3 finetuned models for varying sequence lengths (32, 128, 512, 1024) while maintaing a constant batch size of 32
     * The memory consumption is measured in the same way as the nvidia-smi measures GPU memory usage
@@ -102,7 +95,7 @@ $ python plot_csv_file.py --csv_file benchmark_results/required_memory_2.csv \
                           --plot_along_batch
 ```
 
-## Inference Time Benchmarking
+#### Inference Time Benchmarking
 
 * We find the inference time for varying sequence lengths (8 32 128 512) while maintaning a constant batch size of 256
 ```
@@ -119,7 +112,36 @@ $ python plot_csv_file.py --csv_file benchmark_results/time.csv \
                     --short_model_names distilbert bert squeeze-bert --is_time
 ```
 
-## Results & Observations
+
+## Approach and Solution Diagram
+
+![alt text](https://github.com/supriyaarun27/COMSE6998-Benchmarking-Transformers/blob/main/assets/flowchart.png?raw=true)
+
+
+## Results & Observations:
+
+DistilBERT and SqueezeBERT both compromise F1 and EM scores to a small extent for faster inference speed. 
+
+EM (Exact Match) : A binary measure of whether the system output matches the ground truth answer exactly
+
+![alt text](https://github.com/supriyaarun27/COMSE6998-Benchmarking-Transformers/blob/main/assets/metrics-1.png?raw=true)
+
+
+Architecture changes that we think explain this behavior : 
+
+DistilBERT 
+The model architecture is similar to BERT but has half the number of layers of BERT. Using knowledge distillation the model is able to retain 97% of BERT's language capabilities. 
+[ Our results (F1 score ratio) of 96.8% correlates with the paper's claims ]
+
+SqueezeBERT
+This model is built for edge devices and has BERT's fully connected layers replaced with "grouped convolutions" this makes the model 4x faster but leads to some loss in accuracy.  
+
+### Cost for training on P100-GCP
+
+DistilBERT is most economical to finetune
+Anamoly: SqueezeBERT is most expensive despite being a smaller model than BERT. Requires further investigation.
+
+![alt text](https://github.com/supriyaarun27/COMSE6998-Benchmarking-Transformers/blob/main/assets/cost-1.png?raw=true)
 
 ### Inference Time
 
@@ -164,9 +186,10 @@ $ python plot_csv_file.py --csv_file benchmark_results/time.csv \
 * SqueezeBERT is only marginally lower memory comsumption than DistilBERT
 * Both GPUs do not have sufficient memory to support 512 batch size (max – 256)
 
-* References:
+## References:
 
 1. [BERT : Pre-training of Deep Bidirectional Transformers for Language Understanding ](https://arxiv.org/abs/1810.04805)
 2. [DistilBERT : a distilled version of BERT, smaller, faster, cheaper and lighter](https://arxiv.org/abs/1910.01108)
 3. [Squeeze BERT : What can computer vision teach NLP about efficient neural networks?](https://arxiv.org/abs/2006.11316)
 4. [Hugging Face Documentation](https://huggingface.co/docs)
+
