@@ -1,0 +1,13 @@
+model,batch_size,sequence_length,result
+SupriyaArun/distilbert-base-uncased-finetuned-squad,64,512,3089
+SupriyaArun/distilbert-base-uncased-finetuned-squad,128,512,5297
+SupriyaArun/distilbert-base-uncased-finetuned-squad,256,512,9717
+SupriyaArun/distilbert-base-uncased-finetuned-squad,512,512,N/A
+SupriyaArun/bert-base-uncased-finetuned-squad,64,512,3269
+SupriyaArun/bert-base-uncased-finetuned-squad,128,512,5479
+SupriyaArun/bert-base-uncased-finetuned-squad,256,512,9897
+SupriyaArun/bert-base-uncased-finetuned-squad,512,512,N/A
+SupriyaArun/squeezebert-uncased-finetuned-squad,64,512,3041
+SupriyaArun/squeezebert-uncased-finetuned-squad,128,512,5251
+SupriyaArun/squeezebert-uncased-finetuned-squad,256,512,9673
+SupriyaArun/squeezebert-uncased-finetuned-squad,512,512,N/A
