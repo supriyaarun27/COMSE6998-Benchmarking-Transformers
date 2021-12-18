@@ -62,7 +62,8 @@ DistilBERT and SqueezeBERT both compromise F1 and EM scores to a small extent fo
 
 EM (Exact Match) : A binary measure of whether the system output matches the ground truth answer exactly
 
-![alt text](https://github.com/supriyaarun27/COMSE6998-Benchmarking-Transformers/blob/main/assets/cost.png?raw=true)
+![alt text](https://github.com/supriyaarun27/COMSE6998-Benchmarking-Transformers/blob/main/assets/metrics.png?raw=true)
+
 
 Architecture changes that we think explain this behavior : 
 
@@ -78,5 +79,5 @@ This model is built for edge devices and has BERT's fully connected layers repla
 DistilBERT is most economical to finetune
 Anamoly: SqueezeBERT is most expensive despite being a smaller model than BERT. Requires further investigation.
 
-![alt text](https://github.com/supriyaarun27/COMSE6998-Benchmarking-Transformers/blob/main/assets/metrics.png?raw=true)
+![alt text](https://github.com/supriyaarun27/COMSE6998-Benchmarking-Transformers/blob/main/assets/cost.png?raw=true)
 
